@@ -35,11 +35,10 @@
 ## 文件结构
 
 ``` bash
-├── example.js
-├── index.js
+├── index.js - 入口文件，对参数进行初始化和校验，封装ctx.session，基于lib/context.js。
 ├── lib
-|  ├── context.js
-|  ├── session.js
+|  ├── context.js - 对外暴露get，取session具体的值。默认存储在cookie中，也可以通过配置store从第三方读取。this.session基于lib/session.js。
+|  ├── session.js - session的数据模型，通过get定义一些基本属性
 |  └── util.js
 ```
 
@@ -59,7 +58,21 @@ uuid是实现生成唯一key。
 
 ### index.js
 
-入口文件，对参数进行初始化和校验，调用extendContext()给ctx赋予session，和私有变量
+入口文件，对参数进行初始化和校验，调用extendContext()给ctx赋予session和私有变量CONTEXT_SESSION。
+
+CONTEXT_SESSION用来存储具体ctx.session上的数据。而CONTEXT_SESSION本身的get则是返回基于lib/context.js文件的class实例。
+
+### lib/context.js
+
+对外暴露get，取session具体的值。默认存储在cookie中，通过ctx.cookie管理。也可以通过配置store从第三方读取。
+
+create()方法基于lib/session.js的Session挂载this.session。供get返回。
+
+
+### lib/session.js
+
+session的数据模型，通过get定义一些基本属性如length，maxAge等等。也有一些方法如toJSON，返回所有数据。
+
 
 
 ## Installation
