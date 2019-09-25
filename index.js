@@ -31,7 +31,7 @@ module.exports = function(opts, app) {
   if (!app || typeof app.use !== 'function') {
     throw new TypeError('app instance required: `session(opts, app)`');
   }
-
+  // 初始化和校验参数
   opts = formatOpts(opts);
   extendContext(app.context, opts);
 
@@ -57,7 +57,7 @@ module.exports = function(opts, app) {
  *
  * @api private
  */
-
+// 对参数进行校验和初始化默认参数
 function formatOpts(opts) {
   opts = opts || {};
   // key
@@ -122,17 +122,22 @@ function formatOpts(opts) {
  */
 
 function extendContext(context, opts) {
+  //如果发现有该私有变量则不再重复
   if (context.hasOwnProperty(CONTEXT_SESSION)) {
     return;
   }
+  //给ctx增加私有属性
   Object.defineProperties(context, {
     [CONTEXT_SESSION]: {
       get() {
+        //单例缓存
         if (this[_CONTEXT_SESSION]) return this[_CONTEXT_SESSION];
+        //基于lib/context.js
         this[_CONTEXT_SESSION] = new ContextSession(this, opts);
         return this[_CONTEXT_SESSION];
       },
     },
+    //ctx.session用来存取操作私有属性CONTEXT_SESSION
     session: {
       get() {
         return this[CONTEXT_SESSION].get();

@@ -57,7 +57,9 @@ uuid是实现生成唯一key。
 
 ## 逐个文件分析
 
+### index.js
 
+入口文件，对参数进行初始化和校验，调用extendContext()给ctx赋予session，和私有变量
 
 
 ## Installation
