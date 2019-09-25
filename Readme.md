@@ -30,6 +30,36 @@
 
  *Requires Node 7.6 or greater for async/await support*
 
+# 源码分析
+
+## 文件结构
+
+``` bash
+├── example.js
+├── index.js
+├── lib
+|  ├── context.js
+|  ├── session.js
+|  └── util.js
+```
+
+## 外部模块依赖
+
+![](./graphviz/modules.svg)
+
+crc是实现crc加密算法的node库。
+
+uuid是实现生成唯一key。
+
+## 内部模块依赖
+
+![](./graphviz/inline.gv.svg)
+
+## 逐个文件分析
+
+
+
+
 ## Installation
 
 ```js

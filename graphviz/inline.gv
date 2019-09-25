@@ -1,0 +1,17 @@
+digraph G {
+    nodesep=0.5;
+    charset="UTF-8";
+    rankdir=LR;
+    fixedsize=true;
+    compound=true;
+    node [style="rounded,filled", width=0, height=0, shape=box, fillcolor="#E5E5E5", concentrate=true]
+ 
+  "index.js";
+  "lib/context.js";
+  "lib/util.js";
+  "lib/session.js";
+  "index.js" -> "lib/context.js";
+  "index.js" -> "lib/util.js";
+  "lib/context.js" -> "lib/session.js";
+  "lib/context.js" -> "lib/util.js";
+}

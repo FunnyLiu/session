@@ -23,6 +23,7 @@ const _CONTEXT_SESSION = Symbol('context#_contextSession');
 
 module.exports = function(opts, app) {
   // session(app[, opts])
+  // 兼容两种写法，参数位置调换
   if (opts && typeof opts.use === 'function') {
     [ app, opts ] = [ opts, app ];
   }
@@ -63,6 +64,7 @@ function formatOpts(opts) {
   opts.key = opts.key || 'koa:sess';
 
   // back-compat maxage
+  // 判断是否有该key
   if (!('maxAge' in opts)) opts.maxAge = opts.maxage;
 
   // defaults
